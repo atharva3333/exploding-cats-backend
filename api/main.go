@@ -1,4 +1,4 @@
-package main
+package handler
 
 import (
     "net/http"
@@ -30,7 +30,7 @@ func main() {
 
     router.GET("/albums", getAlbums)
 
-    router.Run("localhost:8080")
+    // router.Run("localhost:8080")
 }
 
 // getAlbums responds with the list of all albums as JSON.
