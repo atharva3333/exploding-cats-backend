@@ -1,21 +1,30 @@
-package handler
+package api
 
 import (
     "github.com/gin-gonic/gin"
     "net/http"
 )
 
-func Handler(w http.ResponseWriter, r *http.Request) {
-    // Create a new Gin router
-    router := gin.Default()
+var(
+	app *gin.Engine
+)
 
-    // Define a GET endpoint at the root path "/"
-    router.GET("/", func(c *gin.Context) {
-        c.JSON(http.StatusOK, gin.H{
-            "message": "hello go from vercel !!!!",
-        })
-    })
+
+func myRoute(r *gin.RouterGroup){
+	r.Get("/admin", func(c *gin.Context){
+		c.String(http.StatusOK,"Hello from vercek")
+	})
+}
+
+func init(){
+	app = gin.New()
+	r := app.Group("/api")
+	myRoute(r)
+}
+
+func Handler(w http.ResponseWriter, r *http.Request) {
+    
 
     // Serve the HTTP request using the Gin router
-    router.ServeHTTP(w, r)
+    app.ServeHTTP(w, r)
 }
